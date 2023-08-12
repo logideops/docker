@@ -1,8 +1,9 @@
 pipeline {
 
   environment {
-    registry = "10.138.0.3:5001/mgsgoms/flask"
-    registry_mysql = "10.138.0.3:5001/mgsgoms/mysql"
+    registry = "gopiguru1988/docker"
+    registry_mysql = "gopiguru1988/docker/mysql"
+    registryCredential="gopiguru1988"
     dockerImage = ""
   }
 
@@ -27,7 +28,7 @@ pipeline {
       steps{
         script {
           
-           docker.withRegistry( '', gopiguru1988 ){
+           docker.withRegistry( '', registryCredential ){
           
             dockerImage.push()
           }
