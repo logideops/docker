@@ -30,6 +30,7 @@ pipeline {
           withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
           //  withCredentials([file(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
     // some block
+             sh 'docker login -u gopiguru1988 -p ${dockerhub}'
 
            docker.withRegistry( '', registryCredential )
           
