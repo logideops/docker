@@ -30,7 +30,7 @@ pipeline {
           //withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')])
             withCredentials([file(credentialsId: 'dockerhub', variable: 'dockerhub')])
     // some block
-}
+
            docker.withRegistry( '', registryCredential ){
           
             dockerImage.push()
