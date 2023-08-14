@@ -3,7 +3,7 @@ pipeline {
   environment {
     registry = "gopiguru1988/docker/flask"
     registry_mysql = "gopiguru1988/docker/mysql"
-    registryCredential="dockerhub"
+    registryCredential= "dockerhub"
     dockerImage = ""
   }
 
