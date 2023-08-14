@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    registry = "gopiguru1988/docker"
+    registry = "gopiguru1988/docker/flask"
     registry_mysql = "gopiguru1988/docker/mysql"
     registryCredential="gopiguru1988"
     dockerImage = ""
