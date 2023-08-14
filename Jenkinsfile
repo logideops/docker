@@ -27,7 +27,7 @@ pipeline {
     stage('Push Image') {
       steps{
         script {
-          withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')])
+          withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
           //  withCredentials([file(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
     // some block
 
