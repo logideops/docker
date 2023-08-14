@@ -27,10 +27,10 @@ pipeline {
     stage('Push Image') {
       steps{
         script {
-          withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
+          withCredentials([string(credentialsId: 'dockerhub1', variable: 'dockerhub1')]) {
           //  withCredentials([file(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
     // some block
-             sh 'docker login -u gopiguru1988 -p ${dockerhub}'
+             sh 'docker login -u gopiguru1988 -p ${dockerhub1}'
 
            docker.withRegistry( '', registryCredential )
           
