@@ -1,4 +1,4 @@
-FROM mysql:latest
+FROM mysql: latest
 # Add a database
 ENV MYSQL_DATABASE=MYUsers
 ENV MYSQL_ROOT_PASSWORD=1nd1a
