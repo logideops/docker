@@ -61,6 +61,19 @@ spec:
         schedulerName: default-scheduler
         securityContext: {}
         terminationGracePeriodSeconds: 30
+        accessModes: ReadWriteOnce
+       resources:
+       requests:
+       storage: 20Gi
+      volumeMounts:
+         - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+         - name: mysql-persistent-storage
+           persistentVolumeClaim:
+           claimName: mysql-pv-claim
+
+        
 ---
 apiVersion: v1
 kind: Service
