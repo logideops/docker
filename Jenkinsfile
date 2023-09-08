@@ -1,9 +1,8 @@
 pipeline {
 
   environment {
-    registry = "gopiguru1988/docker/flask"
-    registry_mysql = "gopiguru1988/docker/mysql"
-    registryCredential= "dockerhub1"
+    registry = "gopisuria/flask"
+    registry_mysql = "gopisuria/mysql"
     dockerImage = ""
   }
 
@@ -12,7 +11,7 @@ pipeline {
   
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/mgsgoms/Docker-Project.git'
+        git 'https://github.com/gopiguru1988/docker.git'
       }
     }
 
@@ -24,18 +23,12 @@ pipeline {
       }
     }
 
-    stage('Push Image') {
+    stage('Push Flask Image') {
       steps{
         script {
-          withCredentials([string(credentialsId: 'dockerhub1', variable: 'dockerhub1')]) {
-          //  withCredentials([file(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
-    // some block
-             sh 'docker login -u gopiguru1988 -p ${dockerhub1}'
-
-           docker.withRegistry( '', registryCredential )
-          
-            dockerImage.push()
-          }
+          withDockerRegistry([ credentialsId: "dockerhub2", url: "" ]) {
+            dockerImage.push()        
+           }
         }
       }
     }
@@ -49,10 +42,33 @@ pipeline {
    }
    stage('Build mysql image') {
      steps{
-       sh 'docker build -t "gopiguru1988/docker/mysql:$BUILD_NUMBER"  "$WORKSPACE"/mysql'
-        sh 'docker push "gopiguru1988/docker/:$BUILD_NUMBER"'
+        script { 
+       withDockerRegistry([ credentialsId: "dockerhub2", url: "" ]) {
+       sh 'docker build -t "gopisuria/mysql:$BUILD_NUMBER"  "$WORKSPACE"/mysql'
+       
+       sh 'docker push "gopisuria/mysql:$BUILD_NUMBER"'
+        }
+      }}}
+      
+    stage('Push MySQL Image') {
+      steps{
+        script {
+          withDockerRegistry([ credentialsId: "dockerhub2", url: "" ]) {
+            dockerImage.push("registry_mysql")
+          }
         }
       }
+    }
+    //stage('Push MySQL Image') {
+    //  steps{
+    //    script {
+    //      withDockerRegistry([ credentialsId: "dockerhub2", url: "" ]) {
+    //        dockerImage.push('registry_mysql',)        
+     //      }
+     //   }
+     // }
+    // }
+    
     stage('Deploy App') {
       steps {
         script {
