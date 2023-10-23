@@ -1,8 +1,8 @@
 pipeline {
 
   environment {
-    registry = "gopisuria/flask"
-    registry_mysql = "gopisuria/mysql"
+    registry = "logidevops/flask"
+    registry_mysql = "logidevops/mysql"
     dockerImage = ""
   }
 
@@ -11,7 +11,7 @@ pipeline {
   
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/gopiguru1988/docker.git'
+        git 'https://github.com/logidevops/docker.git'
       }
     }
 
@@ -44,9 +44,9 @@ pipeline {
      steps{
         script { 
        withDockerRegistry([ credentialsId: "dockerhub2", url: "" ]) {
-       sh 'docker build -t "gopisuria/mysql:$BUILD_NUMBER"  "$WORKSPACE"/mysql'
+       sh 'docker build -t "logidevops/mysql:$BUILD_NUMBER"  "$WORKSPACE"/mysql'
        
-       sh 'docker push "gopisuria/mysql:$BUILD_NUMBER"'
+       sh 'docker push "logidevops/mysql:$BUILD_NUMBER"'
         }
       }}}
       
